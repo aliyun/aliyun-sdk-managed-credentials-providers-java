@@ -54,7 +54,16 @@ public class AliyunSDKSecretsManagerPluginsManager {
 
     public static AliyunSDKSecretsManagerPlugin getSecretsManagerPlugin() {
         if (pluginInstance == null) {
-            throw new RuntimeException("Not initialize secrets manager plugin");
+            synchronized (AliyunSDKSecretsManagerPluginsManager.class) {
+                if (AliyunSDKSecretsManagerPluginsManager.pluginInstance == null) {
+                    try {
+                        AliyunSDKSecretsManagerPluginsManager.pluginInstance = new AliyunSDKSecretsManagerPlugin();
+                        pluginInstance.init();
+                    } catch (CacheSecretException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
         }
         return pluginInstance;
     }
