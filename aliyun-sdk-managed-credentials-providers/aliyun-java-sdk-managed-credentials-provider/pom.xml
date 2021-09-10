@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.aliyun</groupId>
     <artifactId>aliyun-java-sdk-core-managed-credentials-provider</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
     <name>aliyun-java-sdk-core-managed-credentials-provider</name>
     <url>http://www.aliyun.com</url>
@@ -13,7 +13,8 @@
         Copyright (C) Alibaba Cloud Computing
         All rights reserved.
         版权所有 （C）阿里云计算有限公司
-        http://www.aliyun.com</description>
+        http://www.aliyun.com
+    </description>
     <distributionManagement>
         <snapshotRepository>
             <id>sonatype-nexus-snapshots</id>
@@ -28,7 +29,7 @@
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-sdk-common-managed-credentials-provider</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -46,7 +47,8 @@
     </licenses>
     <scm>
         <connection>scm:git:git://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java.git</connection>
-        <developerConnection>scm:git:git@github.com:aliyun/aliyun-sdk-managed-credentials-providers-java.git</developerConnection>
+        <developerConnection>scm:git:git@github.com:aliyun/aliyun-sdk-managed-credentials-providers-java.git
+        </developerConnection>
         <url>https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java</url>
     </scm>
     <developers>
