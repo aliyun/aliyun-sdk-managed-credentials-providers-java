@@ -4,7 +4,7 @@
 
 1. 采用阿里云ECS Ram Role作为访问鉴权方式
 
-    ```properties
+```properties
 credentials_type=ecs_ram_role
 ## ECS RAM Role名称
 credentials_role_name=#credentials_role_name#
@@ -13,11 +13,11 @@ cache_client_region_id=[{"regionId":"#regionId#"}]
 ## 用户自定义的刷新频率, 默认为6小时，最小值为5分钟，单位为毫秒
 ## 下面的配置将凭据刷新频率设定为1小时
 refresh_secret_ttl=3600000
-    ```
+```
 
 2. 采用阿里云Client Key作为访问鉴权方式
 
-    ```properties
+```properties
 ## 访问凭据类型
 credentials_type=client_key
 
@@ -33,5 +33,5 @@ cache_client_region_id=[{"regionId":"#regionId#"}]
 ## 用户自定义的刷新频率, 默认为6小时，最小值为5分钟，单位为毫秒
 ## 下面的配置将凭据刷新频率设定为1小时
 refresh_secret_ttl=3600000
-    ```
+```
 

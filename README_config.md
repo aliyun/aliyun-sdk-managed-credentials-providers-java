@@ -4,7 +4,7 @@ You can use the configuration file named `managed_credentials_providers.properti
 
 1. Use ECS RAM role to access Aliyun KMS,you must set the following configuration variables
 
-    ```
+```
 ## the type of access credentials
 credentials_type=ecs_ram_role
 ## ecs instance RAM Role name
@@ -14,11 +14,11 @@ cache_client_region_id=[{"regionId":"#regionId#"}]
 ## the custom refresh time interval of the secret, by default 6 hour, the minimum value is 5 minutes，the time unit is milliseconds
 ## the config item to set 1 hour with the custom refresh time interval of the secret 
 refresh_secret_ttl=3600000
-    ```
+```
 
 2. Use Client Key to access Aliyun KMS,you must set the following configuration variables
 
-    ``` 
+``` 
 ## the type of access credentials
 credentials_type=client_key
 
@@ -36,4 +36,4 @@ cache_client_region_id=[{"regionId":"#regionId#"}]
 ## the custom refresh time interval of the secret, by default 6 hour, the minimum value is 5 minutes，the time unit is milliseconds
 ## the config item to set 1 hour with the custom refresh time interval of the secret 
 refresh_secret_ttl=3600000
-    ```
+```
