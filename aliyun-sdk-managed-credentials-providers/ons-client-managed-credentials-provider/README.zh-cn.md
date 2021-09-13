@@ -33,14 +33,14 @@ Key被称为[托管RAM凭据](https://help.aliyun.com/document_detail/212421.htm
     <version>4.5.17</version>
 </dependency>
 <dependency>
-<groupId>com.aliyun.openservices</groupId>
-<artifactId>ons-client</artifactId>
-<version>[1.8.5.Final,1.8.7.3.Final]</version>
+    <groupId>com.aliyun.openservices</groupId>
+    <artifactId>ons-client</artifactId>
+    <version>[1.8.5.Final,1.8.7.3.Final]</version>
 </dependency>
 <dependency>
-<groupId>com.aliyun</groupId>
-<artifactId>ons-client-managed-credentials-provider</artifactId>
-<version>1.0.0</version>
+    <groupId>com.aliyun</groupId>
+    <artifactId>ons-client-managed-credentials-provider</artifactId>
+    <version>1.0.1/version>
 </dependency>
 
 ```
