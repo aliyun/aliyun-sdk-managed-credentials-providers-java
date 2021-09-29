@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.aliyun</groupId>
     <artifactId>aliyun-sdk-common-managed-credentials-provider</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
     <name>aliyun-sdk-common-managed-credentials-provider</name>
     <url>http://www.aliyun.com</url>
@@ -34,7 +34,7 @@
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>alibabacloud-secretsmanager-client</artifactId>
-            <version>1.1.8</version>
+            <version>1.1.9</version>
         </dependency>
     </dependencies>
     <licenses>
@@ -119,8 +119,4 @@
             </plugin>
         </plugins>
     </build>
-<<<<<<< HEAD
-=======
--->
->>>>>>> 656e30faf54a04826eede306ce852626c614b878
 </project>
