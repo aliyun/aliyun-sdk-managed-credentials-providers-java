@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.aliyun</groupId>
     <artifactId>aliyun-java-sdk-core-managed-credentials-provider</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
     <name>aliyun-java-sdk-core-managed-credentials-provider</name>
     <url>http://www.aliyun.com</url>
@@ -29,12 +29,12 @@
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-sdk-common-managed-credentials-provider</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

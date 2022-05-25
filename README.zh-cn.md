@@ -5,8 +5,8 @@
 *其他语言版本: [English](README.md), [简体中文](README.zh-cn.md)*
 
 - [阿里云托管RAM凭据主页](https://help.aliyun.com/document_detail/212421.html)
-- [Issues](https://github.com/aliyun/alibabacloud-sdk-secrets-manager-plugins-java/issues)
-- [Release](https://github.com/aliyun/alibabacloud-sdk-secrets-manager-plugins-java/releases)
+- [Issues](https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java/issues)
+- [Release](https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java/releases)
 
 ## 许可证
 
@@ -50,7 +50,7 @@
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>aliyun-sdk-oss-managed-credentials-provider</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 

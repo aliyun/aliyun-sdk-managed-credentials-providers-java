@@ -4,8 +4,8 @@ The Aliyun SDK Managed Credentials Providers for Java enables Java developers to
 Read this in other languages: [English](README.md), [简体中文](README.zh-cn.md)
 
 - [Aliyun Secrets Manager Managed RAM Credentials Summary](https://www.alibabacloud.com/help/doc-detail/152001.htm)
-- [Issues](https://github.com/aliyun/alibabacloud-sdk-secrets-manager-plugins-java/issues)
-- [Release](https://github.com/aliyun/alibabacloud-sdk-secrets-manager-plugins-java/releases)
+- [Issues](https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java/issues)
+- [Release](https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java/releases)
 
 ## License
 
@@ -49,7 +49,7 @@ The recommended way to use the Aliyun SDK Managed Credentials Providers for Java
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>aliyun-sdk-oss-managed-credentials-provider</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 
