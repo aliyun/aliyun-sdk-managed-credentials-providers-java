@@ -6,7 +6,11 @@ import com.aliyuncs.auth.AlibabaCloudCredentialsProvider;
 import com.aliyuncs.auth.InstanceProfileCredentialsProvider;
 import com.aliyuncs.kms.secretsmanager.client.model.ClientKeyCredentialsProvider;
 import com.aliyuncs.kms.secretsmanager.client.model.CredentialsProperties;
+import com.aliyuncs.kms.secretsmanager.client.model.DKmsConfig;
+import com.aliyuncs.kms.secretsmanager.client.model.RegionInfo;
 import com.aliyuncs.kms.secretsmanager.client.utils.CredentialsPropertiesUtils;
+
+import java.util.Map;
 
 public class DefaultSecretsManagerPluginCredentialsProviderLoader implements SecretsManagerPluginCredentialsProviderLoader {
 
@@ -39,17 +43,28 @@ public class DefaultSecretsManagerPluginCredentialsProviderLoader implements Sec
             throw new IllegalArgumentException("credentials properties is invalid");
         }
         AlibabaCloudCredentialsProvider credentialsProvider = credentialsProperties.getProvider();
-        checkCredentialsProvider(credentialsProvider);
-        this.secretsManagerPluginCredentialsProvider.setCredentialsProvider(credentialsProvider);
+        if (!checkDkmsConfigs(credentialsProperties.getDkmsConfigsMap())) {
+            checkCredentialsProvider(credentialsProvider);
+            this.secretsManagerPluginCredentialsProvider.setCredentialsProvider(credentialsProvider);
+            this.secretsManagerPluginCredentialsProvider.setRegionInfoList(credentialsProperties.getRegionInfoList());
+        } else {
+            this.secretsManagerPluginCredentialsProvider.setDkmsConfigsMap(credentialsProperties.getDkmsConfigsMap());
+        }
         this.secretsManagerPluginCredentialsProvider.setSecretExchange(new SecretExchange() {
         });
         this.secretsManagerPluginCredentialsProvider.setSecretRecoveryStrategy(new SecretRecoveryStrategy() {
         });
-        this.secretsManagerPluginCredentialsProvider.setRegionInfoList(credentialsProperties.getRegionInfoList());
         this.secretsManagerPluginCredentialsProvider.setSecretNames(credentialsProperties.getSecretNameList());
         this.secretsManagerPluginCredentialsProvider.setRefreshableCacheSecretStoreStrategy(new MonitorMemoryCacheSecretStoreStrategy(monitorPeriodMilliseconds, monitorCustomerMilliseconds));
         this.secretsManagerPluginCredentialsProvider.setRefreshSecretStrategy(new RotateAKSecretRefreshSecretStrategy(this.secretsManagerPluginCredentialsProvider.getRotationInterval(), this.secretsManagerPluginCredentialsProvider.getDelayInterval()));
         return this.secretsManagerPluginCredentialsProvider;
+    }
+
+    private boolean checkDkmsConfigs(Map<RegionInfo, DKmsConfig> dkmsConfigsMap) {
+        if (dkmsConfigsMap != null && !dkmsConfigsMap.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 
     private void checkCredentialsProvider(AlibabaCloudCredentialsProvider credentialsProvider) {

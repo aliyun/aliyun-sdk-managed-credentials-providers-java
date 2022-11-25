@@ -15,4 +15,12 @@ public class SecretsManagerSdkCorePluginManagerTest {
             e.printStackTrace();
         }
     }
+//    @Test
+//    public void testPlugin() throws ClientException {
+//        DefaultAcsClient client = new ProxyAcsClient("<regionId>","<secretName>");
+//        DescribeInstancesRequest req = new DescribeInstancesRequest();
+//        DescribeInstancesResponse response = client.getAcsResponse(req);
+//        System.out.println(response.getInstances());
+//        client.shutdown();
+//    }
 }

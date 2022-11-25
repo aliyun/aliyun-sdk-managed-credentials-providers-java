@@ -11,6 +11,7 @@ import com.aliyuncs.auth.AlibabaCloudCredentialsProvider;
 import com.aliyuncs.kms.secretsmanager.client.SecretCacheClient;
 import com.aliyuncs.kms.secretsmanager.client.SecretCacheClientBuilder;
 import com.aliyuncs.kms.secretsmanager.client.exception.CacheSecretException;
+import com.aliyuncs.kms.secretsmanager.client.model.DKmsConfig;
 import com.aliyuncs.kms.secretsmanager.client.model.RegionInfo;
 import com.aliyuncs.kms.secretsmanager.client.model.SecretInfo;
 import com.aliyuncs.kms.secretsmanager.client.service.DefaultSecretManagerClientBuilder;
@@ -23,6 +24,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
@@ -38,6 +40,7 @@ public class AliyunSDKSecretsManagerPlugin {
     private ConcurrentHashMap<String, TokenBucket> refreshTimestampMap = new ConcurrentHashMap<>();
     private AlibabaCloudCredentialsProvider credentialsProvider;
     private List<RegionInfo> regionInfoList;
+    private Map<RegionInfo, DKmsConfig> dkmsConfigsMap;
     private List<String> secretNames;
     private SecretExchange secretExchange;
     private SecretRecoveryStrategy secretRecoveryStrategy;
@@ -73,6 +76,7 @@ public class AliyunSDKSecretsManagerPlugin {
         this.secretRecoveryStrategy = secretsManagerPluginCredentialsProvider.getSecretRecoveryStrategy();
         this.cacheSecretStoreStrategy = secretsManagerPluginCredentialsProvider.getRefreshableCacheSecretStoreStrategy();
         this.refreshSecretStrategy = secretsManagerPluginCredentialsProvider.getRefreshSecretStrategy();
+        this.dkmsConfigsMap = secretsManagerPluginCredentialsProvider.getDkmsConfigsMap();
         if (this.credentialsProvider == null || this.regionInfoList == null) {
             throw new IllegalArgumentException("the alibaba cloud credentials provider or region info list is null");
         }
@@ -114,11 +118,18 @@ public class AliyunSDKSecretsManagerPlugin {
     private void initSecretManagerClient() throws CacheSecretException {
         BlockingQueue<MonitorMessageInfo> blockingQueue = new LinkedBlockingQueue<>(1000);
         this.secretsManagerPluginCacheHook = new SecretsManagerPluginCacheHook(blockingQueue, this.secretRecoveryStrategy);
-        DefaultSecretManagerClientBuilder clientBuilder = DefaultSecretManagerClientBuilder.standard().withCredentialsProvider(this.credentialsProvider)
-                .withBackoffStrategy(new FullJitterBackoffStrategy(Constants.RETRY_MAX_ATTEMPTS, Constants.RETRY_INITIAL_INTERVAL_MILLS, Constants.CAPACITY));
-        for (RegionInfo regionInfo : regionInfoList) {
-            clientBuilder.addRegion(regionInfo);
+        DefaultSecretManagerClientBuilder clientBuilder = DefaultSecretManagerClientBuilder.standard();
+        if (this.dkmsConfigsMap != null && !this.dkmsConfigsMap.isEmpty()) {
+            for (DKmsConfig dKmsConfig : this.dkmsConfigsMap.values()) {
+                clientBuilder.addDKmsConfig(dKmsConfig);
+            }
+        } else {
+            clientBuilder.withCredentialsProvider(this.credentialsProvider);
+            for (RegionInfo regionInfo : regionInfoList) {
+                clientBuilder.addRegion(regionInfo);
+            }
         }
+        clientBuilder.withBackoffStrategy(new FullJitterBackoffStrategy(Constants.RETRY_MAX_ATTEMPTS, Constants.RETRY_INITIAL_INTERVAL_MILLS, Constants.CAPACITY));
         SecretCacheClientBuilder secretCacheClientBuilder = SecretCacheClientBuilder.newCacheClientBuilder(clientBuilder.build())
                 .withRefreshSecretStrategy(this.refreshSecretStrategy)
                 .withSecretCacheHook(this.secretsManagerPluginCacheHook).withLogger(LoggerFactory.getLogger(Constants.LOGGER_NAME));
