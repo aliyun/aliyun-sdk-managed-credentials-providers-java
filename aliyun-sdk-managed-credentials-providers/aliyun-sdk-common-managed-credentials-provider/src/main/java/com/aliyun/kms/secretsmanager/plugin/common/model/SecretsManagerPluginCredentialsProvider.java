@@ -1,14 +1,15 @@
 package com.aliyun.kms.secretsmanager.plugin.common.model;
 
 import com.aliyun.kms.secretsmanager.plugin.common.service.MonitorCacheSecretStoreStrategy;
-import com.aliyun.kms.secretsmanager.plugin.common.service.RotateAKSecretRefreshSecretStrategy;
 import com.aliyun.kms.secretsmanager.plugin.common.service.SecretExchange;
 import com.aliyun.kms.secretsmanager.plugin.common.service.SecretRecoveryStrategy;
 import com.aliyuncs.auth.AlibabaCloudCredentialsProvider;
+import com.aliyuncs.kms.secretsmanager.client.model.DKmsConfig;
 import com.aliyuncs.kms.secretsmanager.client.model.RegionInfo;
 import com.aliyuncs.kms.secretsmanager.client.service.RefreshSecretStrategy;
 
 import java.util.List;
+import java.util.Map;
 
 public class SecretsManagerPluginCredentialsProvider {
 
@@ -29,6 +30,8 @@ public class SecretsManagerPluginCredentialsProvider {
     private Long rotationInterval;
 
     private Long delayInterval;
+
+    private Map<RegionInfo, DKmsConfig> dkmsConfigsMap;
 
     public AlibabaCloudCredentialsProvider getCredentialsProvider() {
         return credentialsProvider;
@@ -102,5 +105,14 @@ public class SecretsManagerPluginCredentialsProvider {
 
     public void setDelayInterval(long delayInterval) {
         this.delayInterval = delayInterval;
+    }
+
+
+    public Map<RegionInfo, DKmsConfig> getDkmsConfigsMap() {
+        return dkmsConfigsMap;
+    }
+
+    public void setDkmsConfigsMap(Map<RegionInfo, DKmsConfig> dkmsConfigsMap) {
+        this.dkmsConfigsMap = dkmsConfigsMap;
     }
 }
