@@ -76,7 +76,7 @@ The Aliyun SDK Managed Credentials Providers for Java supports the following Ali
 
 ### Step 1: Configure the credentials provider
 
-Use configuration file(`managed_credentials_providers.properties`)to access KMS([Configuration file setting for details](README_config.md))，You could use the recommended way to access KMS with Client Key.
+Use configuration file(`managed_credentials_providers.properties`)to access KMS([Configuration file setting for details](../../README_config.md))，You could use the recommended way to access KMS with Client Key.
 
 ```properties
 ## the type of access credentials
