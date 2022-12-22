@@ -51,7 +51,7 @@ mvn clean install -DskipTests -Dgpg.skip=true
 
 ### 步骤1：配置托管凭据插件
 
-通过配置文件(`managed_credentials_providers.properties`)指定访问凭据管家([配置文件设置详情](README_config.zh-cn.md))，推荐采用Client Key方式访问凭据管家。
+通过配置文件(`managed_credentials_providers.properties`)指定访问凭据管家([配置文件设置详情](../../README_config.zh-cn.md))，推荐采用Client Key方式访问凭据管家。
 ```properties
 ## 访问凭据类型
 credentials_type=client_key

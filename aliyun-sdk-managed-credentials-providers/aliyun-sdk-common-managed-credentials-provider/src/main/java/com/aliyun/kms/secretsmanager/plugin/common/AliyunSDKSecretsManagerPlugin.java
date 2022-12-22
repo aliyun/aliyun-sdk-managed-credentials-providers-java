@@ -77,7 +77,7 @@ public class AliyunSDKSecretsManagerPlugin {
         this.cacheSecretStoreStrategy = secretsManagerPluginCredentialsProvider.getRefreshableCacheSecretStoreStrategy();
         this.refreshSecretStrategy = secretsManagerPluginCredentialsProvider.getRefreshSecretStrategy();
         this.dkmsConfigsMap = secretsManagerPluginCredentialsProvider.getDkmsConfigsMap();
-        if (this.credentialsProvider == null || this.regionInfoList == null) {
+        if (this.dkmsConfigsMap == null && (this.credentialsProvider == null || this.regionInfoList == null)) {
             throw new IllegalArgumentException("the alibaba cloud credentials provider or region info list is null");
         }
         initSecretManagerClient();

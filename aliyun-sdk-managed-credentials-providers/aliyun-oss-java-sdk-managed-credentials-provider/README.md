@@ -81,7 +81,7 @@ mvn clean install -DskipTests -Dgpg.skip=true
 ### Step 1: Configure the credentials provider
 
 Use configuration file(`managed_credentials_providers.properties`)to access
-KMS([Configuration file setting for details](README_config.md))，You could use the recommended way to access KMS with
+KMS([Configuration file setting for details](../../README_config.md))，You could use the recommended way to access KMS with
 Client Key.
 
 ```properties
