@@ -7,20 +7,17 @@ import com.aliyun.kms.secretsmanager.plugin.common.SecretsManagerPluginCredentia
 import com.aliyun.kms.secretsmanager.plugin.common.auth.SecretsManagerPluginCredentials;
 import com.aliyun.kms.secretsmanager.plugin.common.utils.CredentialsUtils;
 import com.aliyun.kms.secretsmanager.plugin.common.utils.StringUtils;
-import com.aliyun.oss.ClientConfiguration;
-import com.aliyun.oss.OSS;
-import com.aliyun.oss.OSSClient;
-import com.aliyun.oss.OSSException;
+import com.aliyun.kms.secretsmanager.plugin.oss.operations.*;
+import com.aliyun.oss.*;
 import com.aliyun.oss.common.auth.CredentialsProvider;
-import com.aliyun.oss.common.comm.RequestMessage;
-import com.aliyun.oss.common.comm.ResponseMessage;
-import com.aliyun.oss.common.comm.RetryStrategy;
+import com.aliyun.oss.common.comm.*;
 import com.aliyuncs.kms.secretsmanager.client.exception.CacheSecretException;
 import com.aliyuncs.kms.secretsmanager.client.model.SecretInfo;
 import com.aliyuncs.kms.secretsmanager.client.utils.CacheClientConstant;
 import com.aliyuncs.kms.secretsmanager.client.utils.CommonLogger;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -104,50 +101,6 @@ public class SecretsManagerOssPlugin {
         secretsManagerPlugin.closeSecretsManagerPluginUpdaterAndClient(pluginCredentialUpdaterSet);
     }
 
-    class DefaultRetryStrategy extends RetryStrategy implements AKExpireHandler<Exception> {
-
-        private final static String InvalidAccessKeyIdErr = "InvalidAccessKeyId";
-
-        private final String secretName;
-        private final RetryStrategy defaultRetryStrategy;
-        private final AKExpireHandler akExpireHandler;
-
-        public DefaultRetryStrategy(String secretName, RetryStrategy defaultRetryStrategy, AKExpireHandler akExpireHandler) {
-            this.secretName = secretName;
-            this.defaultRetryStrategy = defaultRetryStrategy;
-            this.akExpireHandler = akExpireHandler;
-        }
-
-        @Override
-        public boolean shouldRetry(Exception e, RequestMessage requestMessage, ResponseMessage responseMessage, int i) {
-            if (akExpireHandler != null) {
-                return shouldRetryWithHandler(e, requestMessage, responseMessage, i, akExpireHandler);
-            } else {
-                return shouldRetryWithHandler(e, requestMessage, responseMessage, i, this);
-            }
-        }
-
-        boolean shouldRetryWithHandler(Exception e, RequestMessage requestMessage, ResponseMessage responseMessage, int i, AKExpireHandler akExpireHandler) {
-            if (akExpireHandler.judgeAKExpire(e)) {
-                secretsManagerPlugin.refreshSecretInfo(secretName);
-            } else if (defaultRetryStrategy != null) {
-                return defaultRetryStrategy.shouldRetry(e, requestMessage, responseMessage, i);
-            }
-            return false;
-        }
-
-        @Override
-        public boolean judgeAKExpire(Exception e) {
-            if (e instanceof OSSException) {
-                OSSException ossException = (OSSException) e;
-                if (InvalidAccessKeyIdErr.equals(ossException.getErrorCode())) {
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
-
     class OssClientBuilder implements CloudClientBuilder<OSSClient> {
 
         private final String endpoint;
@@ -177,15 +130,21 @@ public class SecretsManagerOssPlugin {
             if (config == null) {
                 config = new ClientConfiguration();
             }
-            config.setRetryStrategy(new DefaultRetryStrategy(secretName, config.getRetryStrategy(), akExpireHandler));
-            return new ProxyOSSClient(endpoint, provider, config, secretName);
+            return new ProxyOSSClient(endpoint, provider, config, secretName,akExpireHandler);
         }
     }
 
     class ProxyOSSClient extends OSSClient {
 
         private String secretName;
+        private AKExpireHandler akExpireHandler;
         private boolean isClosing;
+        private final static String SERVICE_CLIENT_FIELD_NAME = "serviceClient";
+        private final static String BUCKET_OPERATION_FIELD_NAME = "bucketOperation";
+        private final static String OBJECT_OPERATION_FIELD_NAME = "objectOperation";
+        private final static String MULTIPART_OPERATION_FIELD_NAME = "multipartOperation";
+        private final static String CORS_OPERATION_FIELD_NAME = "corsOperation";
+        private final static String LIVE_CHANNEL_OPERATION_FIELD_NAME = "liveChannelOperation";
 
         public ProxyOSSClient(String accessKeyId, String secretAccessKey) {
             super(accessKeyId, secretAccessKey);
@@ -217,9 +176,11 @@ public class SecretsManagerOssPlugin {
             throw new UnsupportedOperationException("Not support such constructors");
         }
 
-        public ProxyOSSClient(String endpoint, CredentialsProvider credsProvider, ClientConfiguration config, String secretName) {
+        public ProxyOSSClient(String endpoint, CredentialsProvider credsProvider, ClientConfiguration config, String secretName,AKExpireHandler akExpireHandler) {
             super(endpoint, credsProvider, config);
             this.secretName = secretName;
+            this.akExpireHandler = akExpireHandler;
+            initOssOptions();
         }
 
         @Override
@@ -232,6 +193,39 @@ public class SecretsManagerOssPlugin {
                 } catch (IOException e) {
                     CommonLogger.getCommonLogger(CacheClientConstant.MODE_NAME).errorf("action:shutdown", e);
                 }
+            }
+        }
+
+        private void initOssOptions() {
+            Class<OSSClient> ossClientClass = OSSClient.class;
+            try {
+                Field serviceClientField = ossClientClass.getDeclaredField(ProxyOSSClient.SERVICE_CLIENT_FIELD_NAME);
+                serviceClientField.setAccessible(true);
+                Object serviceClient = serviceClientField.get(this);
+
+                Field bucketOperationField = ossClientClass.getDeclaredField(BUCKET_OPERATION_FIELD_NAME);
+                bucketOperationField.setAccessible(true);
+                bucketOperationField.set(this, new ProxyOSSBucketOperation((ServiceClient) serviceClient, this.getCredentialsProvider(), secretName, akExpireHandler,secretsManagerPlugin));
+
+                Field objectOperationField = ossClientClass.getDeclaredField(OBJECT_OPERATION_FIELD_NAME);
+                objectOperationField.setAccessible(true);
+                objectOperationField.set(this, new ProxyOSSObjectOperation((ServiceClient) serviceClient, this.getCredentialsProvider(), secretName, akExpireHandler,secretsManagerPlugin));
+
+                Field multipartOperationField = ossClientClass.getDeclaredField(MULTIPART_OPERATION_FIELD_NAME);
+                multipartOperationField.setAccessible(true);
+                multipartOperationField.set(this, new ProxyOSSMultipartOperation((ServiceClient) serviceClient, this.getCredentialsProvider(), secretName, akExpireHandler,secretsManagerPlugin));
+
+                Field corsOperationField = ossClientClass.getDeclaredField(CORS_OPERATION_FIELD_NAME);
+                corsOperationField.setAccessible(true);
+                corsOperationField.set(this, new ProxyCORSOperation((ServiceClient) serviceClient, this.getCredentialsProvider(), secretName, akExpireHandler,secretsManagerPlugin));
+
+                Field liveChannelOperationField = ossClientClass.getDeclaredField(LIVE_CHANNEL_OPERATION_FIELD_NAME);
+                liveChannelOperationField.setAccessible(true);
+                liveChannelOperationField.set(this, new ProxyLiveChannelOperation((ServiceClient) serviceClient, this.getCredentialsProvider(), secretName, akExpireHandler,secretsManagerPlugin));
+
+                this.setEndpoint(getEndpoint().toString());
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                throw new IllegalArgumentException("not support such OSSClient implements");
             }
         }
     }
