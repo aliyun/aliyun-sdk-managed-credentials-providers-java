@@ -50,6 +50,11 @@ public class SecretsManagerOssPluginManager {
         }
     }
 
+    public static AliyunSDKSecretsManagerPlugin getSecretsManagerPlugin() {
+        initSecretsManagerPlugin();
+        return AliyunSDKSecretsManagerPluginsManager.getSecretsManagerPlugin();
+    }
+
     private static void initSecretsManagerPlugin() {
         if (client == null) {
             synchronized (SecretsManagerOssPluginManager.class) {

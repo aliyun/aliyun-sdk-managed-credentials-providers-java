@@ -40,7 +40,7 @@ Key被称为[托管RAM凭据](https://help.aliyun.com/document_detail/212421.htm
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>ons-client-managed-credentials-provider</artifactId>
-    <version>1.0.3</version>
+    <version>1.2.2</version>
 </dependency>
 
 ```
