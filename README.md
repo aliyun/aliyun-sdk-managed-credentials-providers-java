@@ -49,7 +49,7 @@ The recommended way to use the Aliyun SDK Managed Credentials Providers for Java
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>aliyun-sdk-oss-managed-credentials-provider</artifactId>
-    <version>1.0.3</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
@@ -225,13 +225,3 @@ class AliyunSdkAKExpireHandler implements AKExpireHandler<ClientException> {
 }
 
   ```
-
-
-    
-    
-    
-
-
-
-
- 
