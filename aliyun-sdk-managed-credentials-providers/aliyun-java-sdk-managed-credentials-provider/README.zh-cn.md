@@ -34,7 +34,7 @@
     <dependency>
         <groupId>com.aliyun</groupId>
         <artifactId>aliyun-java-sdk-core-managed-credentials-provider</artifactId>
-        <version>1.2.1</version>
+        <version>1.2.2</version>
     </dependency>
 ```
     

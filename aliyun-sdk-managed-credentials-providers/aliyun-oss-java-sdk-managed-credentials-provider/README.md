@@ -61,9 +61,9 @@ from Maven. Import it as follows:
 </exclusions>
 </dependency>
 <dependency>
-	<groupId>com.aliyun</groupId>
-	<artifactId>aliyun-sdk-oss-managed-credentials-provider</artifactId>
-	<version>1.2.1</version>
+<groupId>com.aliyun</groupId>
+<artifactId>aliyun-sdk-oss-managed-credentials-provider</artifactId>
+<version>1.2.2</version>
 </dependency>
 
 ```
