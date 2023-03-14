@@ -92,6 +92,8 @@ public class OnsProviderSample {
         properties.put(PropertyKeyConst.GROUP_ID, groupId);
         properties.put(PropertyKeyConst.NAMESRV_ADDR, endpoint);
         properties.setProperty(PropertyKeyConst.SendMsgTimeoutMillis, sendMsgTimeoutMillis);
+        //自定义配置文件名称
+        //ConfigLoader.setConfigName("your-config-name");
         // 获取Ons producer
         Producer producer = new ProxyOnsProducerBuilder().build(properties, secretName);
         producer.start();
@@ -145,6 +147,8 @@ public class OnsProviderRetrySample {
         properties.put(PropertyKeyConst.GROUP_ID, groupId);
         properties.put(PropertyKeyConst.NAMESRV_ADDR, endpoint);
         properties.setProperty(PropertyKeyConst.SendMsgTimeoutMillis, sendMsgTimeoutMillis);
+        //自定义配置文件名称
+        //ConfigLoader.setConfigName("your-config-name");
         // 获取Ons producer
         Producer producer = new ProxyOnsProducerBuilder().build(properties, secretName);
         producer.start();

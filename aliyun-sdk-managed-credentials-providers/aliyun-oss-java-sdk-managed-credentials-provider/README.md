@@ -61,9 +61,9 @@ from Maven. Import it as follows:
 </exclusions>
 </dependency>
 <dependency>
-	<groupId>com.aliyun</groupId>
-	<artifactId>aliyun-sdk-oss-managed-credentials-provider</artifactId>
-	<version>1.2.2</version>
+    <groupId>com.aliyun</groupId>
+    <artifactId>aliyun-sdk-oss-managed-credentials-provider</artifactId>
+    <version>1.2.2</version>
 </dependency>
 
 ```
@@ -112,7 +112,8 @@ public class OssProviderSample {
     public static void main(String[] args) throws Exception {
         String secretName = "******";
         String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
-
+        //custom config name
+        //ConfigLoader.setConfigName("your-config-name");
         // get Oss Client
         OSS ossClient = new ProxyOSSClientBuilder().build(endpoint, secretName);
         // business code: your code that calls OSS services
@@ -185,7 +186,8 @@ public class OSSdkRetrySample {
     public static void main(String[] args) throws Exception {
         String secretName = "******";
         String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
-
+        //custom config name
+        //ConfigLoader.setConfigName("your-config-name");
         // get Oss Client
         OSS ossClient = new ProxyOSSClientBuilder().build(endpoint, secretName, new AliyunOSSSdkAKExpireHandler());
         // business code: your code that calls OSS services
