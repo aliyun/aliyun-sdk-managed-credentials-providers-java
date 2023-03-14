@@ -99,6 +99,8 @@ public class OssProviderSample {
         String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
 
 
+        //自定义配置文件名称
+        //ConfigLoader.setConfigName("your-config-name");
         // 获取Oss Client
         OSS ossClient = new ProxyOSSClientBuilder().build(endpoint, secretName);
 
@@ -172,6 +174,8 @@ public class OSSdkRetrySample {
         String secretName = "******";
         String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
 
+        //自定义配置文件名称
+        //ConfigLoader.setConfigName("your-config-name");
         // 获取Oss Client
         OSS ossClient = new ProxyOSSClientBuilder().build(endpoint, secretName, new AliyunOSSSdkAKExpireHandler());
         // 以下为业务方业务代码：调用阿里云OSS服务实现业务功能

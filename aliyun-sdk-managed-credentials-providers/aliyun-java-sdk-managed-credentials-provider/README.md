@@ -81,7 +81,8 @@ public class SdkProviderSample {
     public static void main(String[]args) throws Exception{
         String region="cn-hangzhou";
         String secretName="******";
-        
+        //custom config name
+        //ConfigLoader.setConfigName("your-config-name");
         // get an ACSClient
         IAcsClient client = new ProxyAcsClient(region, secretName);
 
@@ -151,7 +152,8 @@ public class SdkRetrySample {
     public static void main(String[]args) throws Exception{
         String region="cn-hangzhou";
         String secretName="******";
-        
+        //custom config name
+        //ConfigLoader.setConfigName("your-config-name");
         // get an ACSClient
         // provide the given error codes to obtain the credentials again
         IAcsClient client = new ProxyAcsClient(region, secretName, new AliyunSdkAKExpireHandler(new String[]{"InvalidAccessKeyId.NotFound", "InvalidAccessKeyId"}));

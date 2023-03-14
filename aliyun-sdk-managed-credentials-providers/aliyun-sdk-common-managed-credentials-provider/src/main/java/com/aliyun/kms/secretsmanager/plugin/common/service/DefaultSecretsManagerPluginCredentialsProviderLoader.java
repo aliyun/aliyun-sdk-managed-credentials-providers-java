@@ -1,7 +1,9 @@
 package com.aliyun.kms.secretsmanager.plugin.common.service;
 
 import com.aliyun.kms.secretsmanager.plugin.common.model.SecretsManagerPluginCredentialsProvider;
+import com.aliyun.kms.secretsmanager.plugin.common.utils.ConfigLoader;
 import com.aliyun.kms.secretsmanager.plugin.common.utils.Constants;
+import com.aliyun.kms.secretsmanager.plugin.common.utils.StringUtils;
 import com.aliyuncs.auth.AlibabaCloudCredentialsProvider;
 import com.aliyuncs.auth.InstanceProfileCredentialsProvider;
 import com.aliyuncs.kms.secretsmanager.client.model.ClientKeyCredentialsProvider;
@@ -27,7 +29,11 @@ public class DefaultSecretsManagerPluginCredentialsProviderLoader implements Sec
 
     @Override
     public SecretsManagerPluginCredentialsProvider load() {
-        CredentialsProperties credentialsProperties = CredentialsPropertiesUtils.loadCredentialsProperties(Constants.DEFAULT_CREDENTIAL_PROPERTIES_FILE_NAME);
+        String configName = ConfigLoader.getConfigName();
+        if (StringUtils.isEmpty(configName)) {
+            configName = Constants.DEFAULT_CREDENTIAL_PROPERTIES_FILE_NAME;
+        }
+        CredentialsProperties credentialsProperties = CredentialsPropertiesUtils.loadCredentialsProperties(configName);
         long monitorPeriodMilliseconds;
         long monitorCustomerMilliseconds;
         if (credentialsProperties != null) {

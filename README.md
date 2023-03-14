@@ -102,7 +102,7 @@ You cloud use the following code to access Aliyun services with managed RAM cred
 import com.aliyun.kms.secretsmanager.plugin.oss.ProxyOSSClientBuilder;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.Bucket;
-
+import com.aliyun.kms.secretsmanager.plugin.common.utils.ConfigLoader;
 import java.util.List;
     
 public class OssPluginSample {
@@ -110,7 +110,8 @@ public class OssPluginSample {
     public static void main(String[] args) throws Exception {
         String secretName = "******";
         String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
-
+        //custom config name
+        //ConfigLoader.setConfigName("your-config-name");
         // must use the follow method to in the client
         OSS ossClient = new ProxyOSSClientBuilder().build(endpoint, secretName);
 
@@ -180,7 +181,8 @@ public class SdkRetrySample {
     public static void main(String[]args) throws Exception{
         String region="cn-hangzhou";
         String secretName="******";
-        
+        //custom config name
+        //ConfigLoader.setConfigName("your-config-name");
         // get an ACSClient
         // provide the given error codes to obtain the credentials again
         IAcsClient client = new ProxyAcsClient(region, secretName, new AliyunSdkAKExpireHandler(new String[]{"InvalidAccessKeyId.NotFound", "InvalidAccessKeyId"}));
