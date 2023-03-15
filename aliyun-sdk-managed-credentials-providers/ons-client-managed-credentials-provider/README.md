@@ -38,7 +38,7 @@ The recommended way to use the Managed Credentials Provider for ONS Java Client 
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>ons-client-managed-credentials-provider</artifactId>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
 </dependency>
 
 ```
@@ -94,6 +94,8 @@ public class OnsProviderSample {
         properties.put(PropertyKeyConst.GROUP_ID, groupId);
         properties.put(PropertyKeyConst.NAMESRV_ADDR, endpoint);
         properties.setProperty(PropertyKeyConst.SendMsgTimeoutMillis, sendMsgTimeoutMillis);
+        //custom config name
+        //ConfigLoader.setConfigName("your-config-name");
         // get an ons producer
         Producer producer = new ProxyOnsProducerBuilder().build(properties, secretName);
         producer.start();
@@ -145,6 +147,8 @@ public class OnsProviderRetrySample {
         properties.put(PropertyKeyConst.GROUP_ID, groupId);
         properties.put(PropertyKeyConst.NAMESRV_ADDR, endpoint);
         properties.setProperty(PropertyKeyConst.SendMsgTimeoutMillis, sendMsgTimeoutMillis);
+        //custom config name
+        //ConfigLoader.setConfigName("your-config-name");
         // get Ons producer
         Producer producer = new ProxyOnsProducerBuilder().build(properties, secretName);
         producer.start();

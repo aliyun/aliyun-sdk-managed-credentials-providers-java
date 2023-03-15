@@ -34,7 +34,7 @@
     <dependency>
         <groupId>com.aliyun</groupId>
         <artifactId>aliyun-java-sdk-core-managed-credentials-provider</artifactId>
-        <version>1.2.2</version>
+        <version>1.2.3</version>
     </dependency>
 ```
     
@@ -80,7 +80,9 @@ public class SdkProviderSample {
     public static void main(String[]args) throws Exception{
         String region="cn-hangzhou";
         String secretName="******";
-        
+
+        //自定义配置文件名称
+        //ConfigLoader.setConfigName("your-config-name");
         // 获取ACSClient
         IAcsClient client = new ProxyAcsClient(region,secretName);
 
@@ -150,6 +152,8 @@ public class SdkRetrySample {
         String region="cn-hangzhou";
         String secretName="******";
 
+        //自定义配置文件名称
+        //ConfigLoader.setConfigName("your-config-name");
         // 获取 SDK Core客户端
         // 指定特定的错误码进行重新获取凭据值
         IAcsClient client = new ProxyAcsClient(region, secretName, new AliyunSdkAKExpireHandler(new String[]{"InvalidAccessKeyId.NotFound", "InvalidAccessKeyId"}));

@@ -47,7 +47,7 @@ OSS Java SDK托管凭据插件可以使Java开发者通过托管RAM凭据快速�
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>aliyun-sdk-oss-managed-credentials-provider</artifactId>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
 </dependency>
 
 ```
@@ -99,6 +99,8 @@ public class OssProviderSample {
         String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
 
 
+        //自定义配置文件名称
+        //ConfigLoader.setConfigName("your-config-name");
         // 获取Oss Client
         OSS ossClient = new ProxyOSSClientBuilder().build(endpoint, secretName);
 
@@ -172,6 +174,8 @@ public class OSSdkRetrySample {
         String secretName = "******";
         String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
 
+        //自定义配置文件名称
+        //ConfigLoader.setConfigName("your-config-name");
         // 获取Oss Client
         OSS ossClient = new ProxyOSSClientBuilder().build(endpoint, secretName, new AliyunOSSSdkAKExpireHandler());
         // 以下为业务方业务代码：调用阿里云OSS服务实现业务功能
