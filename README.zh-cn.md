@@ -1,4 +1,7 @@
+![](https://aliyunsdk-pages.alicdn.com/icons/AlibabaCloud.svg)
 # 阿里云SDK托管凭据Java插件
+
+[![GitHub version](https://badge.fury.io/gh/aliyun%2Faliyun-sdk-managed-credentials-providers-java.svg)](https://badge.fury.io/gh/aliyun%2Faliyun-sdk-managed-credentials-providers-java)
 
 阿里云SDK托管凭据Java插件可以使Java开发者通过托管RAM凭据快速使用阿里云服务。您可以通过Maven快速使用。
 
@@ -50,7 +53,7 @@
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>aliyun-sdk-oss-managed-credentials-provider</artifactId>
-    <version>1.2.3</version>
+    <version>1.3.1</version>
 </dependency>
 ```
 
