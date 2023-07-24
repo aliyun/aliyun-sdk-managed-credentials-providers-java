@@ -1,6 +1,6 @@
 # 阿里云Java SDK托管凭据插件
 
-阿里云Java SDK的托管凭据插件可以帮助Java开发者更方便的利用托管在SecretsManager的RAM凭据，来访问阿里云服务的开放API。您可以通过Maven快速使用。
+阿里云Java SDK的托管凭据插件可以帮助Java开发者更方便的利用托管在SecretsManager的RAM凭据，来访问阿里云服务的开放API。您可以通过Maven快速使用。[查看可使用的云产品列表](./README_products.zh-cn.md)
 
 *其他语言版本: [English](README.md), [简体中文](README.zh-cn.md)*
 

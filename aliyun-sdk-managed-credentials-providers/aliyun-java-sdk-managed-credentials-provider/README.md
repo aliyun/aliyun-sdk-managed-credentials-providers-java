@@ -1,6 +1,6 @@
 # Managed Credentials Provider for Aliyun Java SDK
 
-The Managed Credentials Provider for Aliyun Java SDK enables Java developers to easily access to other Aliyun Services using managed RAM credentials stored in Aliyun Secrets Manager. You can get started in minutes using Maven .
+The Managed Credentials Provider for Aliyun Java SDK enables Java developers to easily access to other Aliyun Services using managed RAM credentials stored in Aliyun Secrets Manager. You can get started in minutes using Maven .[View a list of available cloud products](./README_products.md)
 
 Read this in other languages: [English](README.md), [简体中文](README.zh-cn.md)
 
