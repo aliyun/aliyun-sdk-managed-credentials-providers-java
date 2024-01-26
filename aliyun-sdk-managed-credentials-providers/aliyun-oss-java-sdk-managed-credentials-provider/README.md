@@ -63,7 +63,7 @@ from Maven. Import it as follows:
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>aliyun-sdk-oss-managed-credentials-provider</artifactId>
-    <version>1.3.2</version>
+    <version>1.3.3</version>
 </dependency>
 
 ```

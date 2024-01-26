@@ -38,7 +38,7 @@ The recommended way to use the Managed Credentials Provider for ONS Java Client 
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>ons-client-managed-credentials-provider</artifactId>
-    <version>1.3.2</version>
+    <version>1.3.3</version>
 </dependency>
 
 ```

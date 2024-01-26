@@ -43,7 +43,7 @@ public interface Constants {
 
     int SECRETSMANAGER_PLUGIN_JAVA_OF_USER_AGENT_PRIORITY = 1;
 
-    String PROJECT_VERSION = "1.3.2";
+    String PROJECT_VERSION = "1.3.3";
 
     String PROPERTIES_MONITOR_PERIOD_MILLISECONDS_KEY = "monitor_period_milliseconds";
 
