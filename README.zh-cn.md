@@ -53,7 +53,7 @@
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>aliyun-sdk-oss-managed-credentials-provider</artifactId>
-    <version>1.3.3</version>
+    <version>1.3.4</version>
 </dependency>
 ```
 
