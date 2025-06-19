@@ -8,6 +8,8 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.kms.secretsmanager.client.cache.SecretCacheHook;
 import com.aliyuncs.kms.secretsmanager.client.model.CacheSecretInfo;
 import com.aliyuncs.kms.secretsmanager.client.model.SecretInfo;
+import com.aliyuncs.kms.secretsmanager.client.utils.CacheClientConstant;
+import com.aliyuncs.kms.secretsmanager.client.utils.CommonLogger;
 
 import java.io.IOException;
 import java.util.*;
@@ -45,7 +47,9 @@ public class SecretsManagerPluginCacheHook implements SecretCacheHook {
             for (SecretsManagerPluginCredentialUpdater updater : updaterList) {
                 try {
                     updater.updateCredential(secretInfo);
+                    CommonLogger.getCommonLogger(CacheClientConstant.MODE_NAME).infof("The secret named [{}] versionId:[{}] update credential success", secretName, secretInfo.getVersionId());
                 } catch (Throwable e) {
+                    CommonLogger.getCommonLogger(CacheClientConstant.MODE_NAME).errorf("The secret named [{}] versionId:[{}] update credential error", secretName, secretInfo.getVersionId(), e);
                     MonitorMessageUtils.addMessage(this.blockingQueue, new MonitorMessageInfo(Constants.UPDATE_CREDENTIAL_ACTION, secretName, null, e.getMessage(), true));
                 }
             }

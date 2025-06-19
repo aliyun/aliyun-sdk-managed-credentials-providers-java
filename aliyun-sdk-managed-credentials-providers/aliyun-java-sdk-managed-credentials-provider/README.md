@@ -34,7 +34,7 @@ The recommended way to use the Managed Credentials Provider for Aliyun Java SDK 
     <dependency>
         <groupId>com.aliyun</groupId>
         <artifactId>aliyun-java-sdk-core-managed-credentials-provider</artifactId>
-        <version>1.3.4</version>
+        <version>1.3.5</version>
     </dependency>
 ```
 
