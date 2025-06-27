@@ -1,6 +1,6 @@
-# Aliyun Tea OpenAPI Java SDK Managed Credentials Plugin
+#  Managed Credentials Provider for Aliyun Tea OpenAPI Java SDK
 
-Aliyun Tea OpenAPI Java SDK Managed Credentials Plugin helps Java developers more easily use RAM credentials managed in SecretsManager to access Aliyun service APIs. You can quickly use it via Maven. [View list of supported cloud products](https://github.com/aliyun/alibabacloud-java-sdk)
+Managed Credentials Provider for Aliyun Tea OpenAPI Java SDK helps Java developers more easily use RAM credentials managed in SecretsManager to access Aliyun service APIs. You can quickly use it via Maven. [View list of supported cloud products](https://github.com/aliyun/alibabacloud-java-sdk)
 
 Read this in other languages: [English](README.md), [简体中文](README.zh-cn.md)
 
@@ -36,7 +36,7 @@ The recommended way to use the Managed Credentials Provider for Aliyun Java SDK 
 
 ### Issue
 
-Due to the plugin's dependency on CGLIB for dynamic class proxying, you may encounter a `java.lang.reflect.InaccessibleObjectException` when running your application on Java 9 or later.
+Due to the provider's dependency on CGLIB for dynamic class proxying, you may encounter a `java.lang.reflect.InaccessibleObjectException` when running your application on Java 9 or later.
 
 ### Solution
 
