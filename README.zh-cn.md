@@ -70,11 +70,13 @@ mvn clean install -DskipTests -Dgpg.skip=true
 
 阿里云SDK托管凭据Java插件支持以下云产品:
 
-| 阿里云SDK名称 | SDK maven(groupId:artifactId) | 支持版本 | 插件名称 | 导入插件maven(groupId:artifactId)  | 
-| :----:| :----: | :----: |  :----: | :----: |
-| 阿里云SDK | com.aliyun:aliyun-java-sdk-core | 4.3.2~4.5.17 | [阿里云Java SDK托管凭据插件](https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java/tree/master/aliyun-sdk-managed-credentials-providers/aliyun-java-sdk-managed-credentials-provider) | com.aliyun:aliyun-java-sdk-core-managed-credentials-provider  | 
-| OSS Java SDK | com.aliyun.oss:aliyun-sdk-oss | 2.1.0~3.10.2 | [OSS Java SDK托管凭据插件](https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java/tree/master/aliyun-sdk-managed-credentials-providers/aliyun-oss-java-sdk-managed-credentials-provider) | com.aliyun:aliyun-sdk-oss-managed-credentials-provider  | 
+|       阿里云SDK名称       | SDK maven(groupId:artifactId) |           支持版本            | 插件名称 | 导入插件maven(groupId:artifactId)  | 
+|:--------------------:| :----: |:-------------------------:|  :----: | :----: |
+|        阿里云SDK        | com.aliyun:aliyun-java-sdk-core |       4.3.2~4.5.17        | [阿里云Java SDK托管凭据插件](https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java/tree/master/aliyun-sdk-managed-credentials-providers/aliyun-java-sdk-managed-credentials-provider) | com.aliyun:aliyun-java-sdk-core-managed-credentials-provider  | 
+|     OSS Java SDK     | com.aliyun.oss:aliyun-sdk-oss |       2.1.0~3.10.2        | [OSS Java SDK托管凭据插件](https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java/tree/master/aliyun-sdk-managed-credentials-providers/aliyun-oss-java-sdk-managed-credentials-provider) | com.aliyun:aliyun-sdk-oss-managed-credentials-provider  | 
 | 消息队列商业版TCP协议Java SDK | com.aliyun.openservices:ons-client | 1.8.5.Final~1.8.7.4.Final | [消息队列商业版TCP协议Java SDK托管凭据插件](https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java/tree/master/aliyun-sdk-managed-credentials-providers/ons-client-managed-credentials-provider) | com.aliyun:ons-client-managed-credentials-provider  | 
+|  阿里云Tea OpenAPI SDK  | com.aliyun:tea-openapi |          >=0.0.1          | [阿里云 Tea OpenAPI Java SDK托管凭据插件](https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java/tree/master/aliyun-sdk-managed-credentials-providers/aliyun-java-tea-openapi-sdk-managed-credentials-provider) | aliyun-java-tea-openapi-sdk-managed-credentials-provider  | 
+
 
 
 ## 使用凭据管家托管RAM凭据方式访问云产品

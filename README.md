@@ -70,11 +70,12 @@ mvn clean install -DskipTests -Dgpg.skip=true
 
 The Aliyun SDK Managed Credentials Providers for Java supports the following Aliyun Services:
 
-| Aliyun SDK Name | SDK maven(groupId:artifactId) | Supported Versions | Plugin Name | Import plugin maven(groupId:artifactId)  | 
-| :----:| :----: | :----: |  :----: | :----: |
-| Alibaba Cloud SDK | com.aliyun:aliyun-java-sdk-core | 4.3.2~4.5.17 | [Managed Credentials Provider for Aliyun Java SDK](https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java/tree/master/aliyun-sdk-managed-credentials-providers/aliyun-java-sdk-managed-credentials-provider) |  com.aliyun:aliyun-java-sdk-core-managed-credentials-provider  | 
-| OSS Java SDK | com.aliyun.oss:aliyun-sdk-oss | 2.1.0~3.10.2 | [Managed Credentials Provider for Aliyun Java OSS SDK](https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java/tree/master/aliyun-sdk-managed-credentials-providers/aliyun-oss-java-sdk-managed-credentials-provider) | com.aliyun:aliyun-sdk-oss-managed-credentials-provider  | 
-| ONS | com.aliyun.openservices:ons-client | 1.8.5.Final~1.8.7.4.Final |[Managed Credentials Provider for ONS Java Client](https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java/tree/master/aliyun-sdk-managed-credentials-providers/ons-client-managed-credentials-provider) | com.aliyun:ons-client-managed-credentials-provider  | 
+| Aliyun SDK Name | SDK maven(groupId:artifactId) | Supported Versions |                                                                                                                Plugin Name                                                                                                                | Import plugin maven(groupId:artifactId)  | 
+| :----:| :----: | :----: |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:| :----: |
+| Alibaba Cloud SDK | com.aliyun:aliyun-java-sdk-core | 4.3.2~4.5.17 |       [Managed Credentials Provider for Aliyun Java SDK](https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java/tree/master/aliyun-sdk-managed-credentials-providers/aliyun-java-sdk-managed-credentials-provider)       |  com.aliyun:aliyun-java-sdk-core-managed-credentials-provider  | 
+| OSS Java SDK | com.aliyun.oss:aliyun-sdk-oss | 2.1.0~3.10.2 |   [Managed Credentials Provider for Aliyun Java OSS SDK](https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java/tree/master/aliyun-sdk-managed-credentials-providers/aliyun-oss-java-sdk-managed-credentials-provider)   | com.aliyun:aliyun-sdk-oss-managed-credentials-provider  | 
+| ONS | com.aliyun.openservices:ons-client | 1.8.5.Final~1.8.7.4.Final |         [Managed Credentials Provider for ONS Java Client](https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java/tree/master/aliyun-sdk-managed-credentials-providers/ons-client-managed-credentials-provider)          | com.aliyun:ons-client-managed-credentials-provider  | 
+|  Tea OpenAPI SDK  | com.aliyun:tea-openapi |          >=0.0.1          | [Managed Credentials Provider for Tea OpenAPI Java SDK](https://github.com/aliyun/aliyun-sdk-managed-credentials-providers-java/tree/master/aliyun-sdk-managed-credentials-providers/aliyun-java-tea-openapi-sdk-managed-credentials-provider) | aliyun-java-tea-openapi-sdk-managed-credentials-provider  |
 
 ## Aliyun Managed Credentials Providers Sample 
 
