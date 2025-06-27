@@ -36,6 +36,26 @@ Key被称为[托管RAM凭据](https://help.aliyun.com/document_detail/212421.htm
 </dependency>
 ```
 
+## 注意事项
+
+### Java 9+ 兼容性说明
+
+由于本插件依赖 CGLIB 对类进行动态代理，在使用 Java 9 及以上版本运行程序时，可能会遇到报错java.lang.reflect.InaccessibleObjectException。
+
+#### 解决方案
+
+请在启动应用时添加以下 JVM 参数，以允许 CGLIB 访问受限的 API：
+```bash
+
+--add-opens java.base/java.lang=ALL-UNNAMED
+```
+例如通过命令行运行程序时：
+```bash
+
+java --add-opens java.base/java.lang=ALL-UNNAMED -jar your-application.jar
+```
+如果你是在 IDE（如 IntelliJ IDEA 或 Eclipse）中运行程序，请在 VM options 中添加该参数。
+
 ## 构建
 
 您可以从Github检出代码通过下面的maven命令进行构建。

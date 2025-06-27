@@ -32,6 +32,28 @@ The recommended way to use the Managed Credentials Provider for Aliyun Java SDK 
     </dependency>
 ```
 
+## Compatibility with Java 9+
+
+### Issue
+
+Due to the plugin's dependency on CGLIB for dynamic class proxying, you may encounter a `java.lang.reflect.InaccessibleObjectException` when running your application on Java 9 or later.
+
+### Solution
+
+To resolve this issue, you need to add the following JVM argument to allow CGLIB to access the restricted API:
+
+```bash
+--add-opens java.base/java.lang.reflect=ALL-UNNAMED
+```
+
+For example, when running your application from the command line:
+
+```bash
+java --add-opens java.base/java.lang=ALL-UNNAMED -jar your-application.jar
+```
+
+If you are running the program in an IDE such as IntelliJ IDEA or Eclipse, please add this parameter to the VM options.
+
 ## Build
 
 Once you check out the code from GitHub, you can build it using Maven. Use the following command to build:
