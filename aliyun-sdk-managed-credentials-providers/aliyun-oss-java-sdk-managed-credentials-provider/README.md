@@ -63,7 +63,7 @@ from Maven. Import it as follows:
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>aliyun-sdk-oss-managed-credentials-provider</artifactId>
-    <version>1.3.5</version>
+    <version>1.3.6</version>
 </dependency>
 
 ```
@@ -240,3 +240,45 @@ class AliyunOSSSdkAKExpireHandler implements AKExpireHandler<Exception> {
 }
 
   ```
+
+## ⚠️ Important Notice: InputStream Retry Limitation
+
+When uploading files with InputStream, please note the following limitation:
+
+### Issue Description
+During credential refresh retry scenarios, the system needs to re-read InputStream data. If the stream doesn't support `mark()`/`reset()` operations, retry will fail.
+
+**Note**: Auto rotation won't cause this issue, only manual rotation might. Recommend using auto rotation.
+
+### Recommended Solutions
+
+**Best Option: Use File object**
+```java
+File file = new File("your-file-path");
+ossClient.putObject(bucketName, objectName, file);
+```
+
+**Alternative: Use repeatable streams**
+```java
+// FileInputStream - naturally supports repetition
+FileInputStream fis = new FileInputStream("path/to/file");
+ossClient.putObject(bucketName, objectName, fis);
+
+// ByteArrayInputStream - supports repetition
+byte[] data = yourData;
+ByteArrayInputStream bais = new ByteArrayInputStream(data);
+ossClient.putObject(bucketName, objectName, bais);
+```
+
+### Stream Type Support
+| Stream Type | Retry Support | Notes |
+|-------------|---------------|-------|
+| FileInputStream | ✅ | Recommended |
+| ByteArrayInputStream | ✅ | Good for small data |
+| BufferedInputStream | ⚠️ | Needs pre-mark |
+| Network Streams | ❌ | No retry support |
+
+### Best Practices
+1. Prefer File objects over InputStream
+2. Consider temporary files for large files
+3. Avoid using one-time network streams for important uploads

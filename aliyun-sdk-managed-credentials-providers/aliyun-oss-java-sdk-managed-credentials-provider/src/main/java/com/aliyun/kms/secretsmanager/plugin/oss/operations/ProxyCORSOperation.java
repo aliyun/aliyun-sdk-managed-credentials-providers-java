@@ -1,11 +1,10 @@
 package com.aliyun.kms.secretsmanager.plugin.oss.operations;
 
 import com.aliyun.kms.secretsmanager.plugin.common.AKExpireHandler;
-import com.aliyun.kms.secretsmanager.plugin.common.AliyunSDKSecretsManagerPlugin;
+import com.aliyun.kms.secretsmanager.plugin.oss.utils.OssPluginUtils;
 import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.OSSException;
-import com.aliyun.oss.common.auth.CredentialsProvider;
 import com.aliyun.oss.common.comm.RequestHandler;
 import com.aliyun.oss.common.comm.RequestMessage;
 import com.aliyun.oss.common.comm.ResponseHandler;
@@ -34,6 +33,7 @@ public class ProxyCORSOperation extends CORSOperation implements ProxyOSSOperati
             return super.doOperation(request, parser, bucketName, key, keepResponseOpen, requestHandlers, reponseHandlers);
         } catch (OSSException e) {
             checkAndRefreshSecretInfo(e, secretName, akExpireHandler, secretsManagerPlugin);
+            OssPluginUtils.resetInputStream(content);
             request.setContent(content);
             request.setContentLength(contentLength);
             return super.doOperation(request, parser, bucketName, key, keepResponseOpen, requestHandlers, reponseHandlers);
